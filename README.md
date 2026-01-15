@@ -1,39 +1,73 @@
 # speak_when_done
 
-An MCP server that allows Claude to speak notifications aloud using Kyutai's Pocket TTS.
+An MCP server that lets your AI assistant speak to you when it's done with a task. No more tab-switching to check on long builds!
 
-## Purpose
+## What it does
 
-This MCP server provides Claude with the ability to notify you audibly when long-running tasks complete. Instead of switching back to check on progress, Claude will speak to you when it needs your attention.
+You kick off a long task (build, test suite, deployment) and go do something else. When it's done, your AI speaks to you:
+
+> "Your build completed successfully with no errors."
+
+> "The test suite finished. 47 passed, 2 failed."
+
+> "I found the bug you were looking for in the auth module."
 
 ## Prerequisites
 
 - macOS (uses `afplay` for audio playback)
 - [uv](https://docs.astral.sh/uv/) package manager
-- `pocket-tts` available via uvx
 
 Test that pocket-tts works:
 ```bash
-uvx pocket-tts generate --text "test" --quiet
+uvx pocket-tts generate --text "hello world" --quiet
 ```
 
 ## Installation
 
-Add this MCP server to Claude Code:
+### Claude Code
 
+Add globally (available in all projects):
 ```bash
-claude mcp add speak_when_done -s user -- uv run --directory ~/localdev/speak_when_done python server.py
+claude mcp add speak_when_done -s user -- uv run --directory /path/to/speak_when_done python server.py
 ```
 
-Or for project-specific configuration:
-
+Or project-specific:
 ```bash
-claude mcp add speak_when_done -- uv run --directory ~/localdev/speak_when_done python server.py
+claude mcp add speak_when_done -- uv run --directory /path/to/speak_when_done python server.py
 ```
+
+### Cursor
+
+Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
+
+```json
+{
+  "mcpServers": {
+    "speak_when_done": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/path/to/speak_when_done",
+        "python",
+        "server.py"
+      ]
+    }
+  }
+}
+```
+
+Then restart Cursor or reload the window.
 
 ## Usage
 
-Once installed, Claude has access to a `speak` tool. The tool is designed to be used only when Claude needs your attention after something significant completes.
+Once installed, your AI has access to a `speak` tool. Ask it to notify you when something finishes:
+
+> "Run the full test suite and tell me out loud when it's done"
+
+> "Deploy to staging and speak to me when it completes"
+
+> "Search for all usages of the deprecated API and let me know what you find"
 
 ### Tool: `speak`
 
@@ -41,15 +75,9 @@ Once installed, Claude has access to a `speak` tool. The tool is designed to be 
 - `message` (required): The message to speak aloud
 - `voice` (optional): Voice to use (default: "alba")
 
-**Example uses:**
-- Build completion notifications
-- Test suite results
-- Deployment status
-- When Claude finds what you asked for during a long search
+## Recommended Instructions
 
-## Recommended Claude Instructions
-
-Add to your Claude Code custom instructions or CLAUDE.md:
+Add to your custom instructions or CLAUDE.md:
 
 ```
 When using the speak_when_done MCP:
@@ -73,9 +101,11 @@ Ensure your macOS audio is not muted and `afplay` is working:
 afplay /System/Library/Sounds/Glass.aiff
 ```
 
-**MCP not connecting:**
-Check the MCP server status:
+**MCP not connecting in Claude Code:**
 ```bash
 claude mcp list
 claude mcp get speak_when_done
 ```
+
+**MCP not connecting in Cursor:**
+Check Settings → Features → MCP to ensure MCP is enabled, then verify your JSON config is valid.
