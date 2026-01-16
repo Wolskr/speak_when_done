@@ -7,7 +7,7 @@ Works as a CLI tool, Python library, or MCP server for AI assistants.
 ## What it does
 
 ```bash
-uvx speak_when_done --text "Your build is complete"
+uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done --text "Your build is complete"
 ```
 
 That's it. It generates speech, plays it, and cleans up the temp file automatically.
@@ -38,22 +38,26 @@ uvx pocket-tts generate --text "hello world" --quiet
 
 No installation needed! Just run:
 ```bash
-uvx speak_when_done --text "Hello world"
+uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done --text "Hello world"
 ```
 
 Options:
 ```bash
-uvx speak_when_done --text "Hello" --voice alba    # specify voice
-uvx speak_when_done --text "Hello" --quiet         # suppress TTS output
-uvx speak_when_done -t "Hello" -v alba -q          # short flags
+uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done -t "Hello" -v alba -q
 ```
+
+| Flag | Long | Description |
+|------|------|-------------|
+| `-t` | `--text` | Text to speak (required) |
+| `-v` | `--voice` | Voice to use (default: alba) |
+| `-q` | `--quiet` | Suppress TTS output |
 
 ### Python library
 
 ```bash
-pip install speak-when-done
+pip install git+https://github.com/Marviel/speak_when_done
 # or
-uv add speak-when-done
+uv add git+https://github.com/Marviel/speak_when_done
 ```
 
 ```python
@@ -67,12 +71,12 @@ result = speak("Hello", voice="alba", quiet=True)
 
 Add globally (available in all projects):
 ```bash
-claude mcp add speak_when_done -s user -- uv run --directory /path/to/speak_when_done python -m speak_when_done.server
+claude mcp add speak_when_done -s user -- uvx --from git+https://github.com/Marviel/speak_when_done python -m speak_when_done.server
 ```
 
 Or project-specific:
 ```bash
-claude mcp add speak_when_done -- uv run --directory /path/to/speak_when_done python -m speak_when_done.server
+claude mcp add speak_when_done -- uvx --from git+https://github.com/Marviel/speak_when_done python -m speak_when_done.server
 ```
 
 ### MCP Server for Cursor
@@ -83,11 +87,10 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
 {
   "mcpServers": {
     "speak_when_done": {
-      "command": "uv",
+      "command": "uvx",
       "args": [
-        "run",
-        "--directory",
-        "/path/to/speak_when_done",
+        "--from",
+        "git+https://github.com/Marviel/speak_when_done",
         "python",
         "-m",
         "speak_when_done.server"
