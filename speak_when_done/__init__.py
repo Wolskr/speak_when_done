@@ -12,6 +12,52 @@ import tempfile
 
 __version__ = "0.1.0"
 
+# Built-in voices available in Pocket TTS
+BUILTIN_VOICES = [
+    {"name": "alba", "description": "Default female voice"},
+    {"name": "alicia", "description": "Female voice variant"},
+    {"name": "carla", "description": "Female voice variant"},
+    {"name": "charlie", "description": "Male voice"},
+    {"name": "danna", "description": "Female voice variant"},
+    {"name": "elena", "description": "Female voice variant"},
+    {"name": "emily", "description": "Female voice variant"},
+    {"name": "erica", "description": "Female voice variant"},
+    {"name": "guy", "description": "Male voice"},
+    {"name": "jessica", "description": "Female voice variant"},
+    {"name": "ken", "description": "Male voice variant"},
+    {"name": "laura", "description": "Female voice variant"},
+    {"name": "lina", "description": "Female voice variant"},
+    {"name": "luca", "description": "Male voice variant"},
+    {"name": "lucia", "description": "Female voice variant"},
+    {"name": "mark", "description": "Male voice"},
+    {"name": "maya", "description": "Female voice variant"},
+    {"name": "michael", "description": "Male voice"},
+    {"name": "mira", "description": "Female voice variant"},
+    {"name": "nisha", "description": "Female voice variant"},
+    {"name": "paola", "description": "Female voice variant"},
+    {"name": "rosie", "description": "Female voice variant"},
+    {"name": "sandra", "description": "Female voice variant"},
+    {"name": "sara", "description": "Female voice variant"},
+    {"name": "sarah", "description": "Female voice variant"},
+    {"name": "sophia", "description": "Female voice variant"},
+    {"name": "tom", "description": "Male voice"},
+]
+
+
+def list_voices() -> dict:
+    """
+    List available voices for text-to-speech.
+
+    Returns:
+        Dictionary with list of built-in voices and instructions for custom voices.
+    """
+    return {
+        "success": True,
+        "builtin_voices": BUILTIN_VOICES,
+        "default_voice": "alba",
+        "custom_voice_hint": "You can also use a path to an audio file for voice cloning.",
+    }
+
 
 def _get_audio_player() -> list[str] | None:
     """
