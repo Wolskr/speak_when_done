@@ -1,8 +1,18 @@
 # speak_when_done
 
-An MCP server that lets your AI assistant speak to you when it's done with a task. No more tab-switching to check on long builds!
+Text-to-speech with automatic temp file handling. Speaks text aloud and cleans up after itself.
+
+Works as a CLI tool, Python library, or MCP server for AI assistants.
 
 ## What it does
+
+```bash
+uvx speak_when_done --text "Your build is complete"
+```
+
+That's it. It generates speech, plays it, and cleans up the temp file automatically.
+
+### As an MCP server
 
 You kick off a long task (build, test suite, deployment) and go do something else. When it's done, your AI speaks to you:
 
@@ -24,19 +34,48 @@ uvx pocket-tts generate --text "hello world" --quiet
 
 ## Installation
 
-### Claude Code
+### CLI (via uvx)
+
+No installation needed! Just run:
+```bash
+uvx speak_when_done --text "Hello world"
+```
+
+Options:
+```bash
+uvx speak_when_done --text "Hello" --voice alba    # specify voice
+uvx speak_when_done --text "Hello" --quiet         # suppress TTS output
+uvx speak_when_done -t "Hello" -v alba -q          # short flags
+```
+
+### Python library
+
+```bash
+pip install speak-when-done
+# or
+uv add speak-when-done
+```
+
+```python
+from speak_when_done import speak
+
+result = speak("Hello world")
+result = speak("Hello", voice="alba", quiet=True)
+```
+
+### MCP Server for Claude Code
 
 Add globally (available in all projects):
 ```bash
-claude mcp add speak_when_done -s user -- uv run --directory /path/to/speak_when_done python server.py
+claude mcp add speak_when_done -s user -- uv run --directory /path/to/speak_when_done python -m speak_when_done.server
 ```
 
 Or project-specific:
 ```bash
-claude mcp add speak_when_done -- uv run --directory /path/to/speak_when_done python server.py
+claude mcp add speak_when_done -- uv run --directory /path/to/speak_when_done python -m speak_when_done.server
 ```
 
-### Cursor
+### MCP Server for Cursor
 
 Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
 
@@ -50,7 +89,8 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
         "--directory",
         "/path/to/speak_when_done",
         "python",
-        "server.py"
+        "-m",
+        "speak_when_done.server"
       ]
     }
   }
@@ -59,21 +99,15 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
 
 Then restart Cursor or reload the window.
 
-## Usage
+## Usage with AI assistants
 
-Once installed, your AI has access to a `speak` tool. Ask it to notify you when something finishes:
+Once installed as an MCP server, your AI has access to a `speak` tool. Ask it to notify you when something finishes:
 
 > "Run the full test suite and tell me out loud when it's done"
 
 > "Deploy to staging and speak to me when it completes"
 
 > "Search for all usages of the deprecated API and let me know what you find"
-
-### Tool: `speak`
-
-**Parameters:**
-- `message` (required): The message to speak aloud
-- `voice` (optional): Voice to use (default: "alba")
 
 ## Recommended Instructions
 
