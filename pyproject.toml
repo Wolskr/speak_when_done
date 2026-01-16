@@ -1,16 +1,15 @@
 [project]
 name = "speak-when-done"
 version = "0.1.0"
-description = "MCP server for text-to-speech notifications using Pocket TTS"
+description = "Text-to-speech with automatic temp file handling, plus MCP server"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "mcp>=1.0.0",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["."]
-only-include = ["server.py"]
+[project.scripts]
+speak_when_done = "speak_when_done.cli:main"
 
 [build-system]
 requires = ["hatchling"]
